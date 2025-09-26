@@ -26,3 +26,20 @@ export async function recordSet(
     restAfterSetSeconds,
   });
 }
+
+// Additional helper functions for workout sessions
+export async function getSessionsByUser(userId) {
+  const res = await api.get(`/sessions?userId=${userId}`);
+  return res.data;
+}
+
+export async function getSessionsByDateRange(userId, startDate, endDate) {
+  const res = await api.get(`/sessions`, {
+    params: {
+      userId,
+      startDate,
+      endDate,
+    },
+  });
+  return res.data;
+}

@@ -2,12 +2,40 @@ import { createRouter, createWebHistory } from "vue-router";
 import ExercisesPage from "@/views/ExercisesPage.vue";
 import HistoryPage from "@/views/HistoryPage.vue";
 import ManagePage from "@/views/ManageExercisePage.vue";
+import WorkoutSessionPage from "@/views/WorkoutSessionPage.vue";
+import CalendarPage from "@/views/CalendarPage.vue";
 
 const routes = [
-  { path: "/", redirect: "/exercises" },
-  { path: "/exercises", component: ExercisesPage },
-  { path: "/history", component: HistoryPage },
-  { path: "/manage", component: ManagePage },
+  {
+    path: "/",
+    name: "home",
+    component: ExercisesPage,
+  },
+  {
+    path: "/exercises",
+    redirect: "/",
+  },
+  {
+    path: "/history",
+    name: "history",
+    component: HistoryPage,
+  },
+  {
+    path: "/manage",
+    name: "manage",
+    component: ManagePage,
+  },
+  {
+    path: "/calendar",
+    name: "calendar",
+    component: CalendarPage,
+  },
+  {
+    path: "/workout/:id",
+    name: "workout-session",
+    component: WorkoutSessionPage,
+    props: true,
+  },
 ];
 
 const router = createRouter({

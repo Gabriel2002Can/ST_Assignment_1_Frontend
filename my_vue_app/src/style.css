@@ -1,12 +1,28 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  /* Workout-themed color palette */
+  --primary-orange: #ff6b35;
+  --primary-blue: #2563eb;
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
+  --dark-gray: #1f2937;
+  --medium-gray: #6b7280;
+  --light-gray: #f9fafb;
+  --warm-gradient: linear-gradient(
+    135deg,
+    #ff9a9e 0%,
+    #fecfef 50%,
+    #fecfef 100%
+  );
+  --fitness-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --energy-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+
+  font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
+    sans-serif;
+  line-height: 1.6;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color-scheme: light;
+  color: var(--dark-gray);
+  background: linear-gradient(120deg, #fef7ff 0%, #f0f9ff 50%, #f0fff4 100%);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,65 +31,284 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--primary-blue);
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--primary-orange);
+  transform: translateY(-1px);
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: var(--fitness-gradient);
+  background-attachment: fixed;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
+    sans-serif;
+  font-weight: 700;
+  color: var(--dark-gray);
+  margin-bottom: 0.5em;
+  letter-spacing: -0.02em;
+}
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: clamp(2rem, 4vw, 3rem);
+  background: var(--energy-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+  border-radius: 12px;
+  border: none;
+  padding: 12px 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background: var(--energy-gradient);
+  color: #fff;
   cursor: pointer;
-  transition: border-color 0.25s;
+  box-shadow: 0 4px 14px 0 rgba(240, 149, 251, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
 }
 button:hover {
-  border-color: #646cff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px 0 rgba(240, 149, 251, 0.4);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid var(--primary-orange);
+  outline-offset: 2px;
 }
 
 .card {
-  padding: 2em;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(31, 41, 55, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(31, 41, 55, 0.15);
 }
 
 #app {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 1.5rem;
+  text-align: left;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 1em;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  padding: 0.5em 1em;
+  background: #f8fafc;
+  color: #222;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(30, 64, 175, 0.04);
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #2563eb;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+}
+
+@media (max-width: 600px) {
+  #app {
+    padding: 0.5rem;
   }
-  a:hover {
-    color: #747bff;
+  .card {
+    padding: 1em;
+  }
+  h1 {
+    font-size: 1.5em;
+  }
+  h2 {
+    font-size: 1.2em;
   }
   button {
-    background-color: #f9f9f9;
+    font-size: 0.95em;
+    padding: 0.5em 0.8em;
   }
+}
+
+/* Icon sizing - target both SVGs and icon components */
+svg,
+[class*="icon"],
+.icon,
+i[class*="fa"] {
+  width: 1rem !important;
+  height: 1rem !important;
+  font-size: 1rem !important;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+/* Specific targeting for Heroicons */
+svg[data-slot="icon"],
+.heroicon {
+  width: 1rem !important;
+  height: 1rem !important;
+}
+
+/* Navigation icons specifically */
+nav svg,
+nav i,
+.nav-link svg,
+.nav-link i,
+button svg,
+button i {
+  width: 1rem !important;
+  height: 1rem !important;
+  font-size: 1rem !important;
+}
+
+/* Ensure icons in buttons are properly sized */
+button > svg,
+button > i,
+.btn > svg,
+.btn > i {
+  width: 1rem !important;
+  height: 1rem !important;
+  font-size: 1rem !important;
+  margin-right: 0.5rem;
+}
+
+/* Fix for any remaining large icons */
+* > svg,
+* > i[class*="fa"] {
+  max-width: 1.5rem !important;
+  max-height: 1.5rem !important;
+  font-size: 1rem !important;
+}
+
+/* Workout-themed utility classes */
+.workout-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(31, 41, 55, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.workout-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(31, 41, 55, 0.12);
+}
+
+.exercise-item {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(249, 250, 251, 0.9) 100%
+  );
+  border-radius: 16px;
+  border-left: 4px solid var(--primary-blue);
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.exercise-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 107, 53, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.exercise-item:hover::before {
+  left: 100%;
+}
+
+.exercise-item:hover {
+  border-left-color: var(--primary-orange);
+  transform: translateX(4px);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.status-planned {
+  background: linear-gradient(135deg, #fef3c7, #fcd34d);
+  color: #92400e;
+}
+
+.status-completed {
+  background: linear-gradient(135deg, #d1fae5, #10b981);
+  color: #065f46;
+}
+
+.status-inprogress {
+  background: linear-gradient(135deg, #dbeafe, #3b82f6);
+  color: #1e40af;
+}
+
+.workout-button {
+  background: var(--energy-gradient);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(240, 149, 251, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.workout-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(240, 149, 251, 0.4);
+}
+
+.fitness-gradient-bg {
+  background: var(--fitness-gradient);
+  background-attachment: fixed;
 }
